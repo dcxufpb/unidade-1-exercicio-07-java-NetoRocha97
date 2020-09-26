@@ -2,7 +2,6 @@ package com.example.project;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class TestCupomFiscal {
@@ -101,7 +100,7 @@ public class TestCupomFiscal {
 	@Test
 	public void cepVazio() {
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_CEP, NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO,
-				ESTADO, null, TELEFONE, OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+				ESTADO, "", TELEFONE, OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
 	}
 
 	@Test
@@ -119,7 +118,7 @@ public class TestCupomFiscal {
 	@Test
 	public void cnpjVazio() {
 		verificarCampoObrigatorio("O campo CNPJ da loja é obrigatório", NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO,
-				BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE, OBSERVACAO, null, INSCRICAO_ESTADUAL);
+				BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE, OBSERVACAO, "", INSCRICAO_ESTADUAL);
 	}
 
 	@Test
@@ -131,22 +130,29 @@ public class TestCupomFiscal {
 	@Test
 	public void exercicio02_Customizado() {
 		// Defina seus próprios valores para as variáveis a seguir
-		String nomeLoja = "";
-		String logradouro = "";
-		int numero = 0;
-		String complemento = "";
-		String bairro = "";
-		String municipio = "";
-		String estado = "";
-		String cep = "";
-		String telefone = "";
-		String observacao = "";
-		String cnpj = "";
-		String inscricaoEstadual = "";
+		String nomeLoja = "Loja CRVG";
+		String logradouro = "R. Gen. Almério de Moura";
+		int numero = 131;
+		String complemento = "Estádio";
+		String bairro = "São Januário";
+		String municipio = "Rio de Janeiro";
+		String estado = "RJ";
+		String cep = "20921060";
+		String telefone = "(21) 91898-1927";
+		String observacao = "Obs 1";
+		String cnpj = "12.111.333/12133-12";
+		String inscricaoEstadual = "123.456.789.000";
 
 		// E atualize o texto esperado abaixo
-		rodarTestarRetorno("" + BREAK, nomeLoja, logradouro, numero, complemento, bairro, municipio, estado, cep,
-				telefone, observacao, cnpj, inscricaoEstadual);
+		rodarTestarRetorno("Loja CRVG" + BREAK + 
+		"R. Gen. Almério de Moura, 131 Estádio" + BREAK + 
+		"São Januário - Rio de Janeiro - RJ" + BREAK + 
+		"CEP:20921060 Tel (21) 91898-1927" + BREAK + 
+		"Obs 1" + BREAK + 
+		"CNPJ: 12.111.333/12133-12" + BREAK + 
+		"IE: 123.456.789.000" + BREAK, nomeLoja, logradouro, numero, complemento, bairro, municipio, estado, cep, 
+		telefone, observacao, cnpj, inscricaoEstadual);
+
 	}
 
 	private void rodarTestarRetorno(String expected, String nomeLoja, String logradouro, int numero, String complemento,
